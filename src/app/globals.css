@@ -1,0 +1,537 @@
+@import "tailwindcss";
+
+:root {
+  --background: #030508;
+  --foreground: #f8fbff;
+  --muted: #c2cde0;
+  --card: #0a111a;
+  --border: #3a4a64;
+  --accent: #43f0d5;
+  --panel-header: #0b1824;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    "Courier New", monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #f6f7fb;
+    --foreground: #131820;
+    --muted: #5d6878;
+    --card: #ffffff;
+    --border: #d7dde7;
+    --accent: #0f766e;
+    --panel-header: #eef2f9;
+    color-scheme: light;
+  }
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  letter-spacing: 0.01em;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(800px 400px at 15% -10%, rgba(45, 212, 191, 0.12), transparent 60%),
+    radial-gradient(600px 300px at 90% 0%, rgba(56, 189, 248, 0.08), transparent 55%);
+  background-repeat: no-repeat;
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="file"]::file-selector-button {
+  cursor: pointer;
+}
+
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled,
+input[type="file"]:disabled::file-selector-button {
+  cursor: not-allowed;
+}
+
+input[type="date"] {
+  color-scheme: dark;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--foreground);
+  background-color: var(--card);
+  accent-color: var(--accent);
+  caret-color: var(--foreground);
+}
+
+@media (prefers-color-scheme: light) {
+  input[type="date"] {
+    color-scheme: light;
+  }
+}
+
+@supports (-moz-appearance: none) {
+  input[type="date"] {
+    -moz-appearance: textfield;
+  }
+
+  input[type="date"]::-moz-datetime-edit,
+  input[type="date"]::-moz-datetime-edit-fields-wrapper,
+  input[type="date"]::-moz-datetime-edit-text,
+  input[type="date"]::-moz-datetime-edit-year-field,
+  input[type="date"]::-moz-datetime-edit-month-field,
+  input[type="date"]::-moz-datetime-edit-day-field {
+    color: var(--foreground);
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  input[type="date"]:-moz-ui-invalid {
+    box-shadow: none;
+    color: var(--foreground);
+  }
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: var(--foreground);
+  font-family: inherit;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.7;
+}
+
+@media (prefers-color-scheme: dark) {
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+
+main {
+  background: transparent;
+}
+
+.mdxeditor-root [role="toolbar"] {
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem;
+  background: var(--card);
+}
+
+.mdxeditor-root [role="toolbar"] button,
+.mdxeditor-root [role="toolbar"] select {
+  color: var(--foreground);
+  background: transparent;
+}
+
+.mdxeditor-root [role="toolbar"] button:hover,
+.mdxeditor-root [role="toolbar"] select:hover {
+  color: var(--foreground);
+}
+
+.mdxeditor-root [role="toolbar"] svg {
+  color: var(--foreground);
+  stroke: currentColor;
+}
+
+.mdxeditor-root {
+  background: var(--card);
+  color: var(--foreground);
+  --accentBase: var(--accent);
+  --accentBg: color-mix(in srgb, var(--accent) 18%, var(--card));
+  --accentBgHover: color-mix(in srgb, var(--accent) 28%, var(--card));
+  --accentBgActive: color-mix(in srgb, var(--accent) 36%, var(--card));
+  --accentBorder: color-mix(in srgb, var(--accent) 45%, var(--border));
+  --accentBorderHover: color-mix(in srgb, var(--accent) 60%, var(--border));
+  --accentSolid: var(--accent);
+  --accentSolidHover: color-mix(in srgb, var(--accent) 90%, #ffffff 10%);
+  --accentText: var(--accent);
+  --accentTextContrast: #041016;
+  --basePageBg: var(--card);
+  --baseBase: var(--card);
+  --baseBgSubtle: #0f1622;
+  --baseBg: #121b28;
+  --baseBgHover: #1a2534;
+  --baseBgActive: #223246;
+  --baseLine: var(--border);
+  --baseBorder: var(--border);
+  --baseBorderHover: #2a3b54;
+  --baseSolid: #2a3b54;
+  --baseSolidHover: #344862;
+  --baseText: var(--foreground);
+  --baseTextContrast: var(--foreground);
+}
+
+.mdxeditor-root .mdxeditor-toolbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.mdxeditor-root .mdxeditor-toolbar button,
+.mdxeditor-root .mdxeditor-toolbar select,
+.mdxeditor-root .mdxeditor-toolbar input {
+  color: var(--foreground);
+  background: transparent;
+  border-color: var(--border);
+}
+
+.mdxeditor-root .mdxeditor-toolbar button:hover,
+.mdxeditor-root .mdxeditor-toolbar select:hover,
+.mdxeditor-root .mdxeditor-toolbar input:hover {
+  color: var(--foreground);
+}
+
+.mdxeditor-root select,
+.mdxeditor-root option {
+  background: var(--card);
+  color: var(--foreground);
+  color-scheme: dark;
+}
+
+.mdxeditor-root [class*="_toolbarNodeKindSelectContainer_"],
+.mdxeditor-root [class*="_toolbarButtonDropdownContainer_"],
+.mdxeditor-root [class*="_toolbarCodeBlockLanguageSelectContent_"],
+.mdxeditor-root [class*="_selectContainer_"] {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.mdxeditor-root [class*="_toolbarNodeKindSelectTrigger_"],
+.mdxeditor-root [class*="_toolbarButtonSelectTrigger_"],
+.mdxeditor-root [class*="_selectTrigger_"] {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.mdxeditor-root [class*="_selectTrigger_"][data-placeholder] > span:first-child {
+  color: var(--muted);
+}
+
+.mdxeditor-root [class*="_toolbarNodeKindSelectItem_"],
+.mdxeditor-root [class*="_selectItem_"] {
+  color: var(--foreground);
+  background: var(--card);
+}
+
+.mdxeditor-root [class*="_toolbarNodeKindSelectItem_"][data-highlighted],
+.mdxeditor-root [class*="_selectItem_"][data-highlighted] {
+  background: #1b2738;
+}
+
+.mdxeditor-root [class*="_toolbarNodeKindSelectItem_"][data-state="checked"],
+.mdxeditor-root [class*="_selectItem_"][data-state="checked"] {
+  background: #203146;
+  color: var(--foreground);
+}
+
+.mdxeditor-root [class*="_toolbarNodeKindSelectDropdownArrow_"],
+.mdxeditor-root [class*="_selectDropdownArrow_"] {
+  color: var(--muted);
+}
+
+.mdxeditor-root [class*="_linkDialogPopoverContent_"],
+.mdxeditor-root [class*="_dialogContent_"],
+.mdxeditor-root [class*="_tableColumnEditorPopoverContent_"] {
+  background: var(--card) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent) !important;
+  padding: 0.5rem !important;
+}
+
+.mdxeditor-root [class*="_linkDialogPopoverContent_"]:has([class*="_linkDialogEditForm_"]),
+.mdxeditor-root [class*="_dialogContent_"]:has(form),
+.mdxeditor-root [class*="_tableColumnEditorPopoverContent_"]:has(form) {
+  padding: 1.5rem !important;
+}
+
+.mdxeditor-root [class*="_linkDialogInputWrapper_"],
+.mdxeditor-root [class*="_linkDialogInputContainer_"],
+.mdxeditor-root [class*="_linkDialogEditForm_"] {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.mdxeditor-root [class*="_dialogInput_"],
+.mdxeditor-root [class*="_linkDialogInput_"] {
+  background: var(--card) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.mdxeditor-root [class*="_linkDialogInput_"]::placeholder,
+.mdxeditor-root [class*="_dialogInput_"]::placeholder,
+[class*="_linkDialogInput_"]::placeholder,
+[class*="_dialogInput_"]::placeholder,
+[class*="_linkDialogInputWrapper_"] input::placeholder,
+[class*="_linkDialogPopoverContent_"] input::placeholder,
+[class*="_dialogContent_"] input::placeholder {
+  color: var(--muted) !important;
+  opacity: 1 !important;
+}
+
+.mdxeditor-root [class*="_linkDialogPreviewAnchor_"] {
+  color: var(--accent);
+}
+
+div[class*="_popoverContent_"] {
+  padding: 0.5rem !important;
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+}
+
+button[class*="_actionButton_"],
+button[class*="_iconButton_"] {
+  color: var(--foreground) !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+button[class*="_actionButton_"]:hover,
+button[class*="_iconButton_"]:hover {
+  background-color: transparent !important;
+  background-image: none !important;
+  background: transparent !important;
+  color: var(--accent) !important;
+  border: none !important;
+}
+
+button[class*="_actionButton_"] svg,
+button[class*="_iconButton_"] svg {
+  color: var(--foreground) !important;
+  fill: var(--foreground) !important;
+}
+
+button[class*="_actionButton_"]:hover svg,
+button[class*="_iconButton_"]:hover svg {
+  color: var(--accent) !important;
+  fill: var(--accent) !important;
+}
+
+[class*="_linkDialogPopoverContent_"],
+[class*="_dialogContent_"],
+[class*="_tableColumnEditorPopoverContent_"] {
+  background: var(--card) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent) !important;
+  padding: 0.5rem !important;
+}
+
+[class*="_linkDialogPopoverContent_"]:has([class*="_linkDialogEditForm_"]),
+[class*="_dialogContent_"]:has(form),
+[class*="_tableColumnEditorPopoverContent_"]:has(form) {
+  padding: 1.5rem !important;
+}
+
+[class*="_linkDialogPopoverContent_"] [class*="_linkDialogInputWrapper_"],
+[class*="_dialogContent_"] [class*="_linkDialogInputWrapper_"],
+[class*="_tableColumnEditorPopoverContent_"] [class*="_linkDialogInputWrapper_"] {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+[class*="_linkDialogPopoverContent_"] [class*="_linkDialogInput_"],
+[class*="_dialogContent_"] [class*="_linkDialogInput_"],
+[class*="_linkDialogPopoverContent_"] [class*="_dialogInput_"],
+[class*="_dialogContent_"] [class*="_dialogInput_"] {
+  color: var(--foreground) !important;
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+[class*="_linkDialogInputWrapper_"] {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+[class*="_linkDialogInput_"],
+[class*="_dialogInput_"] {
+  background: var(--card) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  box-shadow: none !important;
+  outline: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+[class*="_linkDialogInputWrapper_"] input,
+[class*="_linkDialogInput_"] input,
+[class*="_dialogInput_"] input,
+[class*="_linkDialogPopoverContent_"] input,
+[class*="_dialogContent_"] input {
+  background: var(--card) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+[class*="_linkDialogPopoverContent_"] [class*="_primaryButton_"],
+[class*="_dialogContent_"] [class*="_primaryButton_"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #031116;
+}
+
+[class*="_linkDialogPopoverContent_"] [class*="_secondaryButton_"],
+[class*="_dialogContent_"] [class*="_secondaryButton_"] {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+[class*="_linkDialogPopoverContent_"] [class*="_primaryButton_"]:hover,
+[class*="_dialogContent_"] [class*="_primaryButton_"]:hover {
+  background: color-mix(in srgb, var(--accent) 90%, #ffffff 10%);
+  border-color: color-mix(in srgb, var(--accent) 80%, var(--border));
+}
+
+[class*="_linkDialogPopoverContent_"] [class*="_secondaryButton_"]:hover,
+[class*="_dialogContent_"] [class*="_secondaryButton_"]:hover {
+  border-color: var(--accent);
+  color: var(--foreground);
+}
+
+.mdxeditor-root-contenteditable {
+  min-height: 220px;
+  padding: 0.75rem;
+  color: var(--foreground);
+  background: var(--card);
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.mdxeditor-root-contenteditable[class*="_placeholder_"] {
+  white-space: normal;
+  max-width: 100%;
+  width: 100%;
+  right: 0;
+}
+
+.mdxeditor-root {
+  resize: vertical;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.mdxeditor-root-contenteditable * {
+  color: var(--foreground);
+}
+
+.mdxeditor-root-contenteditable h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0.6rem 0 0.4rem;
+}
+
+.mdxeditor-root-contenteditable h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0.5rem 0 0.35rem;
+}
+
+.mdxeditor-root-contenteditable h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0.4rem 0 0.3rem;
+}
+
+.mdxeditor-root-contenteditable p {
+  margin: 0.35rem 0;
+}
+
+.mdxeditor-root-contenteditable ul,
+.mdxeditor-root-contenteditable ol {
+  padding-left: 1.25rem;
+  margin: 0.35rem 0;
+}
+
+.mdxeditor-root-contenteditable ul {
+  list-style: disc;
+  list-style-position: outside;
+}
+
+.mdxeditor-root-contenteditable ol {
+  list-style: decimal;
+  list-style-position: outside;
+}
+
+.mdxeditor-root-contenteditable li {
+  display: list-item;
+}
+
+.mdxeditor-root-contenteditable li::marker {
+  color: var(--foreground);
+}
+
+.mdxeditor-root-contenteditable blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: 0.75rem;
+  color: var(--muted);
+  margin: 0.5rem 0;
+}
+
+.mdxeditor-root-contenteditable code {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+}
