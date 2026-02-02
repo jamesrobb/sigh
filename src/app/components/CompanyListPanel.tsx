@@ -9,6 +9,7 @@ type CompanySummary = {
   linkedin: string | null;
   roleCount: number;
   personCount: number;
+  lastInteractionAt: number | null;
 };
 
 type CompanyListPanelProps = {
@@ -17,6 +18,23 @@ type CompanyListPanelProps = {
 
 export default function CompanyListPanel({ companies }: CompanyListPanelProps) {
   const router = useRouter();
+
+  function formatDateTime(value: number | null) {
+    if (!value) {
+      return "N/A";
+    }
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return "N/A";
+    }
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  }
 
   function shouldIgnoreCardClick(
     target: EventTarget | null,
@@ -54,7 +72,7 @@ export default function CompanyListPanel({ companies }: CompanyListPanelProps) {
           }}
           className="cursor-pointer rounded-xl border border-[color:var(--border)] bg-black/5 p-5 transition-colors hover:border-[color:var(--accent)] dark:bg-white/5"
         >
-          <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-start justify-between gap-4">
             <div className="flex min-w-0 items-start gap-3">
               <div className="flex-none pt-0.5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--panel-header)] text-[color:var(--accent)]">
@@ -103,7 +121,7 @@ export default function CompanyListPanel({ companies }: CompanyListPanelProps) {
                               ? entry.url
                               : `https://${entry.url}`
                           }
-                          className="underline underline-offset-4"
+                          className="underline underline-offset-4 break-all"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -131,7 +149,7 @@ export default function CompanyListPanel({ companies }: CompanyListPanelProps) {
                               ? entry.linkedin
                               : `https://${entry.linkedin}`
                           }
-                          className="underline underline-offset-4"
+                          className="underline underline-offset-4 break-all"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -145,7 +163,10 @@ export default function CompanyListPanel({ companies }: CompanyListPanelProps) {
                 )}
               </div>
             </div>
-            <div className="text-xs text-[color:var(--muted)]">
+            <div className="shrink-0 text-right text-xs text-[color:var(--muted)]">
+              <div className="text-[color:var(--foreground)]">
+                Last interaction: {formatDateTime(entry.lastInteractionAt)}
+              </div>
               <div className="text-[color:var(--foreground)]">
                 Roles: {entry.roleCount}
               </div>

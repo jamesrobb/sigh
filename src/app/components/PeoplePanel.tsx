@@ -262,8 +262,8 @@ export default function PeoplePanel({ people, companies, tags }: PeoplePanelProp
                       </svg>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-wrap items-start justify-between gap-4">
-                    <div className="space-y-2">
+                  <div className="flex flex-1 items-start justify-between gap-4">
+                    <div className="min-w-0 space-y-2">
                       <p className="text-base font-semibold text-[color:var(--foreground)]">
                         <Link
                           href={`/people/${entry.id}`}
@@ -323,7 +323,7 @@ export default function PeoplePanel({ people, companies, tags }: PeoplePanelProp
                             </span>
                             <a
                               href={`mailto:${entry.email}`}
-                              className="underline underline-offset-4"
+                              className="underline underline-offset-4 break-all"
                             >
                               {entry.email}
                             </a>
@@ -347,7 +347,7 @@ export default function PeoplePanel({ people, companies, tags }: PeoplePanelProp
                                   ? entry.linkedin
                                   : `https://${entry.linkedin}`
                               }
-                              className="underline underline-offset-4"
+                              className="underline underline-offset-4 break-all"
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -379,7 +379,7 @@ export default function PeoplePanel({ people, companies, tags }: PeoplePanelProp
                       </div>
                     </div>
 
-                    <div className="text-xs text-[color:var(--muted)]">
+                    <div className="shrink-0 text-right text-xs text-[color:var(--muted)]">
                       <div className="text-[color:var(--foreground)]">
                         Last interaction: {formatDateTime(entry.lastInteractionAt)}
                       </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { asc, sql } from "drizzle-orm";
+import { asc, eq, sql } from "drizzle-orm";
 import { db } from "@/db";
-import { company, person, role } from "@/db/schema";
+import { company, interactionPerson, interactionRole, person, role } from "@/db/schema";
 import CompanyCreateModal from "@/app/components/CompanyCreateModal";
 import CompanyListPanel from "@/app/components/CompanyListPanel";
 import GlobalNavLinks from "@/app/components/GlobalNavLinks";
@@ -45,10 +45,56 @@ export default function CompaniesIndexPage() {
   const personCountByCompany = new Map(
     personCounts.map((entry) => [Number(entry.companyId), Number(entry.count)])
   );
+
+  const roleInteractionDates = db
+    .select({
+      companyId: interactionRole.companyId,
+      lastInteractionAt: sql<number>`max(${interactionRole.occurredAt})`.as(
+        "last_interaction_at"
+      ),
+    })
+    .from(interactionRole)
+    .groupBy(interactionRole.companyId)
+    .all();
+
+  const personInteractionDates = db
+    .select({
+      companyId: person.companyId,
+      lastInteractionAt: sql<number>`max(${interactionPerson.occurredAt})`.as(
+        "last_interaction_at"
+      ),
+    })
+    .from(interactionPerson)
+    .innerJoin(person, eq(interactionPerson.personId, person.id))
+    .groupBy(person.companyId)
+    .all();
+
+  const lastInteractionByCompany = new Map<number, number>();
+  for (const entry of roleInteractionDates) {
+    if (entry.lastInteractionAt === null || entry.lastInteractionAt === undefined) {
+      continue;
+    }
+    lastInteractionByCompany.set(
+      Number(entry.companyId),
+      Number(entry.lastInteractionAt)
+    );
+  }
+  for (const entry of personInteractionDates) {
+    if (entry.lastInteractionAt === null || entry.lastInteractionAt === undefined) {
+      continue;
+    }
+    const companyId = Number(entry.companyId);
+    const current = lastInteractionByCompany.get(companyId);
+    const next = Number(entry.lastInteractionAt);
+    if (current === undefined || next > current) {
+      lastInteractionByCompany.set(companyId, next);
+    }
+  }
   const companySummaries = companies.map((entry) => ({
     ...entry,
     roleCount: roleCountByCompany.get(entry.id) ?? 0,
     personCount: personCountByCompany.get(entry.id) ?? 0,
+    lastInteractionAt: lastInteractionByCompany.get(entry.id) ?? null,
   }));
 
   return (
