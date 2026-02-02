@@ -245,20 +245,22 @@ export default function PeoplePanel({ people, companies, tags }: PeoplePanelProp
                 className="cursor-pointer rounded-lg border border-[color:var(--border)] bg-black/5 p-4 text-sm text-[color:var(--foreground)] transition-colors hover:border-[color:var(--accent)] dark:bg-white/5"
               >
                 <div className="flex items-start gap-3">
-                  <div className="flex-none self-center flex h-8 w-8 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--panel-header)] text-[color:var(--accent)]">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4"
-                      aria-hidden="true"
-                    >
-                      <path d="M20 21a8 8 0 0 0-16 0" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
+                  <div className="flex-none pt-0.5">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--panel-header)] text-[color:var(--accent)]">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-4 w-4"
+                        aria-hidden="true"
+                      >
+                        <path d="M20 21a8 8 0 0 0-16 0" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    </div>
                   </div>
                   <div className="flex flex-1 flex-wrap items-start justify-between gap-4">
                     <div className="space-y-2">

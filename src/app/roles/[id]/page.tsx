@@ -405,7 +405,8 @@ export default async function RolePage({ params }: RolePageProps) {
                         </span>
                       </Link>
                       <div className="relative z-10 flex items-start gap-3 pointer-events-none">
-                        <div className="flex-none self-center flex h-8 w-8 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--panel-header)] text-[color:var(--accent)]">
+                        <div className="flex-none pt-0.5">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--panel-header)] text-[color:var(--accent)]">
                           <svg
                             viewBox="0 0 24 24"
                             fill="none"
@@ -419,6 +420,7 @@ export default async function RolePage({ params }: RolePageProps) {
                             <path d="M20 21a8 8 0 0 0-16 0" />
                             <circle cx="12" cy="7" r="4" />
                           </svg>
+                          </div>
                         </div>
                         <div className="space-y-2">
                           <p className="text-base font-semibold text-[color:var(--foreground)] transition-colors group-hover:text-[color:var(--accent)]">

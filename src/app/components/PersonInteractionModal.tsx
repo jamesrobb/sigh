@@ -419,7 +419,7 @@ export default function PersonInteractionModal({
                   <label className="text-sm font-semibold text-[color:var(--foreground)]">
                     Occurred at
                   </label>
-                  <div className="grid gap-2 sm:grid-cols-2">
+                  <div className="grid gap-2 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
                     <input
                       type="date"
                       value={occurredDate}

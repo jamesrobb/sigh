@@ -166,7 +166,7 @@ export default function PersonInteractionList({
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex min-w-0 flex-1 items-start gap-3">
-                      <div className="flex-none self-stretch flex items-center">
+                      <div className="flex-none pt-0.5">
                         <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[color:var(--border)] bg-[color:var(--panel-header)] text-[color:var(--accent)]">
                           <svg
                             viewBox="0 0 24 24"
@@ -210,9 +210,7 @@ export default function PersonInteractionList({
                               </Link>
                             </>
                           ) : (
-                            <span className="text-xs text-[color:var(--muted)]">
-                              person interaction
-                            </span>
+                            null
                           )}
                         </div>
                         {entry.notes ? (
